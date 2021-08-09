@@ -10,13 +10,6 @@ class Home extends Component {
     this.props.createPosts();
   }
 
-  // componentDidMount() {
-  //   axios.get("https://jsonplaceholder.typicode.com/posts").then(res => {
-  //     console.log(res);
-  //     this.setState({ posts: res.data.slice(0, 10) });
-  //   });
-  // }
-
   render() {
     console.log("Props", this.props);
     const postLink = this.props.data.length ? (
@@ -24,7 +17,7 @@ class Home extends Component {
         return (
           <div className="card m-3" key={post.id}>
             <div className="card-body">
-              <Link to={"/" + post.id}>
+              <Link to={"/" + post.id} className="text-decoration-none">
                 <h3 className="card-title text-center">{post.title}</h3>
               </Link>
               <p className="card-text">{post.body}</p>
@@ -54,8 +47,8 @@ class Home extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  data:state.data
+const mapStateToProps = ({data={}}) => ({
+  data:data
 });
 
 export default connect(mapStateToProps,{createPosts})(Home);
